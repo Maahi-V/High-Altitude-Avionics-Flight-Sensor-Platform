@@ -1,0 +1,8 @@
+site_name: AFS v3.0 | Avionics Flight Sensor
+theme: mkdocs
+
+nav:
+  - 'Engineering Screen': index.md
+  - 'Power System': power/power.md
+  - 'Recovery & Ignition': recovery/recovery.md
+  - 'Sensors': sensors/sensors.md
