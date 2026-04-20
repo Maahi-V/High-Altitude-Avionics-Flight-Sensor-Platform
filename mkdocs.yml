@@ -3,6 +3,6 @@ theme: mkdocs
 
 nav:
   - 'Engineering Screen': index.md
+  - 'Sensors': sensors/sensors.md
   - 'Power System': power/power.md
   - 'Recovery & Ignition': recovery/recovery.md
-  - 'Sensors': sensors/sensors.md

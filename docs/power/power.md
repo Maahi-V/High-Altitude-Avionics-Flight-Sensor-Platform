@@ -53,7 +53,7 @@ With **R74 (10.5kΩ)** and **R78 (47kΩ)**, the rail is tuned for high stability
 ![3.3V Regulator Section](../assets/regulator_snippet.png)
 *Figure 5: MP1584 Switching Regulator circuit tuned for high-current peak handling.*
 
-## 5. Debugging & Programming Interface
+## Debugging & Programming Interface
 
 ### SWD Header (J5)
 ![SWD Snippet](../assets/swd_snippet.png)

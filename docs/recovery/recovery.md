@@ -17,8 +17,6 @@ A 1Ω shunt resistor (**R33/R34**) is placed in series with the deployment loop.
 * **Pre-Flight:** The MCU can pulse the line at low duty-cycle to check for continuity without firing the pyro.
 * **Post-Fire:** The system can verify if the E-Match has successfully cleared the circuit.
 
-**Recovery Flowchart:**
-[Insert System Diagram Image Here]
-*Figure 8: .*
+
 
 
