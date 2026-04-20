@@ -46,7 +46,7 @@ The AFS is designed to be "plug-and-play" for the ground crew. One of the most c
 ---
 
 ## Full System Schematic
-![AFS Full Schematic](../assets/full_schematic.png)
+![AFS Full Schematic](assets/full_schematic.png)
 *Figure 1: Complete AFS Schematic - currently in design phase*
 
 

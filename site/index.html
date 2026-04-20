@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>AFS v3.0 | Avionics Flight Sensor</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">AFS v3.0 | Avionics Flight Sensor</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="." class="nav-link active" aria-current="page">Engineering Screen</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="power/power/" class="nav-link">Power System</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="recovery/recovery/" class="nav-link">Recovery & Ignition</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="sensors/sensors/" class="nav-link">Sensors</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="power/power/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#high-altitude-avionics-flight-sensor-afs" class="nav-link">High-Altitude Avionics Flight Sensor (AFS)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#system-overview" class="nav-link">System Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#interesting-component-high-side-mosfet-ignition-logic" class="nav-link">Interesting Component: High-Side MOSFET Ignition Logic</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#ease-of-use-diode-o-ring-power-selector" class="nav-link">Ease of Use: Diode O-Ring Power Selector</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#quick-reference-specs" class="nav-link">Quick Reference Specs</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#full-system-schematic" class="nav-link">Full System Schematic</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="high-altitude-avionics-flight-sensor-afs">High-Altitude Avionics Flight Sensor (AFS)</h1>
+<p>This documentation serves as the technical Design Specification for the AFS v3.0 platform. The AFS is a high-performance flight computer optimized for collecting meteorological telemetry and managing dual-stage recovery ignition for high-altitude vehicles.</p>
+<h3 id="system-architecture">System Architecture</h3>
+<p>The board is centered around an <strong>STM32G474VET6</strong> MCU, chosen specifically for its high-resolution PWM for servo control and several SPI/I2C buses for per sensor load and isolation.</p>
+<p><strong>Current Status:</strong> WIP</p>
+<hr />
+<h2 id="system-overview">System Overview</h2>
+<p>The architecture follows a zone isolation design:</p>
+<ul>
+<li><strong>Power Zone:</strong> High-current regulation and source arbitration.</li>
+<li><strong>Control Zone:</strong> High-speed processing and logic.</li>
+<li><strong>Sensor Zone:</strong> Low-noise analog and digital bus isolation.</li>
+<li><strong>Recovery Zone:</strong> Isolated high-side power switching.</li>
+</ul>
+<h2 id="interesting-component-high-side-mosfet-ignition-logic">Interesting Component: High-Side MOSFET Ignition Logic</h2>
+<ul>
+<li><strong>Design Justification</strong> Standard low-side switching is common, but in a high power rocketry environment with carbon-fiber and metallic component, leaving pyrotechnics electrically hot provides unintentional paths to ground through the rocket's chassis. High-switching alternatively ensures that the e-match remains at 0v potentional during standby, preventing any accidental ground from triggering early recovery deploymen during assembly pre-flight. </li>
+<li><strong>Operating Principle:</strong> This design utilizes a two stage MOSFET driver where an N-Channel FET (Q1) can act as gate driver for a high-current P-Channel Power FET (Q2). </li>
+<li><strong>Safety:</strong> The circuit has a 10kΩ PD resistor to prevent accidental firing during MCU boot-up.</li>
+<li><strong>Deep Dive:</strong> Detailed circuit analysis and continuity check logic can be found in the <a href="recovery/recovery/">Recovery Systems</a> page!</li>
+</ul>
+<hr />
+<h2 id="ease-of-use-diode-o-ring-power-selector">Ease of Use: Diode O-Ring Power Selector</h2>
+<ul>
+<li><strong>Design Choice: Power Handling</strong>
+The AFS is designed to be "plug-and-play" for the ground crew. One of the most common difficulties in the previous iteration of this board was power management during data offloading or firmware updates. The o-ring circuit aims to tackle the issue of manually switching between power sources during ground operations, automatically selecting whichever source is available.</li>
+<li><strong>Feature:</strong> I implemented a <strong>Diode O-Ring</strong> circuit using Schottky barriers (<strong>D4, D5</strong>) to arbitrate between the 2S LiPo battery and USB-C VBUS as power. Having both  </li>
+<li><strong>Design Jusification:</strong> This updated circuitry automatically selects the highest voltage rail while preventing dangerous back-feeding into the USB port and removing the necessity for manual intervention.</li>
+<li><strong>Technical Details:</strong> Full schematic &amp; Schottky diode selection criteria are on the <a href="power/power/">Power Distribution</a> page.</li>
+<li><strong>Note - Design Idea:</strong> The idea is derived from my experience as a Micromouse Co-Lead where we must iterate rapidly during competition. I turned on battery to my mouse and had usb in (w the 3v3 wire) and burned my 5v ldo. bleh.</li>
+</ul>
+<hr />
+<h2 id="quick-reference-specs">Quick Reference Specs</h2>
+<ul>
+<li><strong>Dimensions:</strong> 40mm x 60mm with <strong>4x M2 Mounting Holes</strong> for high-vibe environments.</li>
+<li><strong>Sensors:</strong> Isolated I2C bus featuring the <a href="sensors/sensors/">BMM350 Magnetometer</a>.</li>
+<li><strong>Regulation:</strong> 3.3V / 2A high-efficiency switching regulator. <a href="power/power/">View Regulator Specs</a>.</li>
+</ul>
+<hr />
+<h2 id="full-system-schematic">Full System Schematic</h2>
+<p><img alt="AFS Full Schematic" src="../assets/full_schematic.png" />
+<em>Figure 1: Complete AFS Schematic - currently in design phase</em></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+        <script src="search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-04-20 02:46:49.679933+00:00
+-->
